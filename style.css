@@ -1,0 +1,11 @@
+#workDisplay{
+	background-color: red;
+}
+#restDisplay{
+	background-color: green;
+}
+.timeModifier{
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+}
