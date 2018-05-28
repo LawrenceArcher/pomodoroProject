@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Pomodoro Timer</title>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
-	<h1>Pomodoro clock</h1>
+	<h1>How we spend our days is how we spend our lives</h1>
 	<div class="controls">
-			<div>
+			<div class="controller">
 				<h2>Work time</h2>
-				<p id="workTime">1</p>
+				<p id="workTime">25</p>
 				<button id="workTimePlus" class="timeModifier">+</button>
 				<button id="workTimeMinus" class="timeModifier">-</button>
 			</div>
-			<div>
+			<div class="controller">
 				<h2>Rest time</h2>
-				<p id="restTime">1</p>
+				<p id="restTime">5</p>
 				<button id="restTimePlus" class="timeModifier">+</button>
 				<button id="restTimeMinus" class="timeModifier">-</button>
 			</div>
-			<div id="workDisplay"></div>
-			<div id="restDisplay"></div>
-			<button id="start">Start</button>
-			<button id="pause">Pause</button>
-			<button id="stop">Stop</button>
-			<button id="reset">Reset</button>
+			<div class="displayContainer">
+				<div id="workDisplay" class="display"></div>
+				<div id="restDisplay" class="display"></div>
+			</div>
+			<div class="buttons">
+				<button id="start"><i class="fas fa-play"></i></button>
+				<button id="pause"><i class="fas fa-pause"></i></button>
+				<button id="stop"><i class="fas fa-stop"></i></button>
+				<button id="reset"><i class="fas fa-redo"></i></button>
+			</div>
 	</div>
 
-<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

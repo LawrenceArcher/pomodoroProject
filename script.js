@@ -1,4 +1,4 @@
-let duration = 0;
+let globalDuration = 0;
 let pauseState = 0;
 let workComplete = false;
 let workDisplay = document.querySelector("#workDisplay");
@@ -14,18 +14,19 @@ let restTimePlus = document.querySelector("#restTimePlus");
 let restTimeMinus = document.querySelector("#restTimeMinus");
 let pause = document.querySelector("#pause");
 start.addEventListener('click', (e) => {
-    //if paused do something
-    //if started do something else
+    //if new start do this
     if (pauseState == 0){
         pauseState = 1;
-        workDuration = workTime.textContent*60;
-        timer(workDuration, workDisplay);
-
-    }else if (pauseState == 2){
+        globalDuration = workTime.textContent*60;
+        timer(globalDuration, workDisplay);   
+    }else if (pauseState == 2){ //if recommencing from pause do this
         pauseState = 1;
-        timer(workDuration, workDisplay);
+        if (workComplete == true){
+            timer(globalDuration, restDisplay);
+        }else if (workComplete == false){
+            timer(globalDuration, workDisplay);
+        }
     };
-    timer(workDuration, workDisplay);
 });
 pause.addEventListener('click', (e) => {
     //fix duration + stop timer function
@@ -34,6 +35,9 @@ pause.addEventListener('click', (e) => {
 stop.addEventListener('click', (e) => {
     //resets everyting to initial values - perhaps need to store initial values
     pauseState = 0;
+    workDisplay.textContent = "";
+    restDisplay.textContent = "";
+    workComplete = false;
 });
 reset.addEventListener('click', (e) => {
     location.reload();
@@ -65,13 +69,20 @@ function timer(duration, display) {
         display.textContent = secsToDisplay(duration);
         duration --;
         
-        if (duration < 0) {
+        if (duration < 0 && workComplete == false) {
             workComplete = true;
             clearInterval(interval);
+            alert("Work time complete!");
+            duration = restTime.textContent*60;
+            timer(duration, restDisplay);
+        }else if (duration < 0 && workComplete == true){
+            workComplete = false;
+            clearInterval(interval);
         }
+
         if (pauseState == 2){
             clearInterval(interval);
-            workDuration = duration;
+            globalDuration = duration;
         }else if (pauseState == 0){
             clearInterval(interval);
             workDisplay.textContent = secsToDisplay(workTime.textContent*60);
@@ -87,9 +98,3 @@ function secsToDisplay (duration){
 
     return minutes + ":" + seconds;
 }
-
-if (workComplete == true){
-        alert("Work time complete!")
-        duration = restTime.textContent*60;
-        timer(duration, restDisplay)
-    }
